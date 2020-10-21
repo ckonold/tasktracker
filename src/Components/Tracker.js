@@ -5,13 +5,16 @@ import React from 'react';
 class Tracker extends React.Component{
 	constructor(props){
 		super(props)
-		this.state = {tasks: ["hello world"]}
+		console.log(this.props);
+		
 	}
 
 	render(){
-		const tasks = ["wash the car","Fuck the car","Kiss the car","Call Mark"];
+		let tasks = this.props.tasks
+		
 		const taskMapped = tasks.map((task) => 
-			<p style = {{}}>{task}<button>-</button></p>);
+			<p>{task}<button>-</button></p>);
+		
 		return(
 			<div>	
 			{taskMapped}

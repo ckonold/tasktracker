@@ -5,21 +5,36 @@ import Tracker from './Components/Tracker.js';
 class App extends React.Component{
 	constructor(props){
 		super(props)
-		this.state = {tasks: []}
+		this.state = {tasks: [], showError: false}
 		this.addTask = this.addTask.bind(this);
 	
 		this.clearInput = this.clearInput.bind(this);
 		this.removeTask = this.removeTask.bind(this);
 	}
 
-	addTask(event){
-		let add = document.getElementById("taskInput").value
-		if(add !== ""){
-			let oldTasks = this.state.tasks;
-			oldTasks.push(add);
-			this.setState({
-				tasks: oldTasks
-			})
+	
+	addTask(){
+		let isThere = false;
+		let oldTasks = this.state.tasks;
+		let add = document.getElementById("taskInput").value.toLowerCase();
+		for(let task of oldTasks){
+			if(task == add){
+				isThere = true;
+			}
+		}
+		if(!isThere){
+			if(add == ""){
+				this.setState({
+					showError: true
+				})
+			}
+			else{
+				oldTasks.push(add);
+				this.setState({
+					showError:false
+					tasks: oldTasks
+				})
+			}
 		}	
 	}
 
